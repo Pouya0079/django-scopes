@@ -1,28 +1,14 @@
-import uuid
 from enum import Enum
 
 from django.db import models
-from django.utils import timezone
 
-
-class BaseModel(models.Model):
-
-    _id = models.UUIDField(
-        primary_key=True,
-        default=uuid.uuid4,
-        editable=False,
-    )
-
-    created_at = models.DateTimeField(default=timezone.now)
-    updated_at = models.DateTimeField(default=timezone.now)
-
-    class Meta:
-        abstract = True
+from .base import BaseModel
 
 
 class Post(BaseModel):
 
     class PostStatus(Enum):
+
         ACTIVE = ('a', 'active')
         DEACTIVE = ('d', 'deactive')
         UNKNOWN = ('u', 'unknown')
